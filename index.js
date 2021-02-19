@@ -105,3 +105,52 @@ const engineerQuestions = () => {
         }
     ])
 };
+
+const internQuestions = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            message: "What is the intern full name",
+            name: 'fullName',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the intern employee ID",
+            name: 'employeeID',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the intern email address",
+            name: 'email',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the intern school name",
+            name: 'school',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        }
+    ])
+};
