@@ -57,3 +57,51 @@ const managerQuestions = () => {
     ])
 };
 
+const engineerQuestions = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            message: "What is the engineer full name",
+            name: 'fullName',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the engineer employee ID",
+            name: 'employeeID',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the engineer email address",
+            name: 'email',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        },
+        {
+            type: 'input',
+            message: "What is the engineer Github name",
+            name: 'github',
+            validate: (answer) => {
+                if (answer.length < 1) {
+                    return console.log("A valid GitHub username is required.");
+                }
+                return true;
+            }
+        }
+    ])
+};
