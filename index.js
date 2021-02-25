@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
 let choiceArr = ['Manager', 'Engineer', 'Intern']
+import {Manager, Engineer, Intern} from './classes.js';
 let hasManager = false;
 
 const employeeQuestions = () => {
@@ -37,7 +38,7 @@ const employeeQuestions = () => {
            ]).then(managerRes => {
                hasManager = 'true'
                choiceArr = ['Engineer', 'Intern']
-            //    const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
+               const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
                 addOtherEmplyee()
            })
         }
@@ -49,6 +50,7 @@ const employeeQuestions = () => {
                     name: 'gitAccount',
                 }   
                ]).then(enginerrRes => {
+                const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, enginerrRes.gitAccount)
                    addOtherEmplyee()
                })
         }
@@ -60,6 +62,7 @@ const employeeQuestions = () => {
                     name: 'school',
                 }   
                ]).then(internRes => {
+                const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, internRes.school)
                 addOtherEmplyee()
                })
         }
