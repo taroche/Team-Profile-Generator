@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
 let choiceArr = ['Manager', 'Engineer', 'Intern']
-import {Manager, Engineer, Intern} from './classes.js';
+import { Manager, Engineer, Intern } from './classes.js';
 let hasManager = false;
 
 const employeeQuestions = () => {
@@ -29,30 +29,30 @@ const employeeQuestions = () => {
         },
     ]).then(initialResponse => {
         if (initialResponse.role === "Manager") {
-           inquirer.prompt([
-            {
-                type: 'input',
-                message: "What is your office number",
-                name: 'officeNum',
-            }   
-           ]).then(managerRes => {
-               hasManager = 'true'
-               choiceArr = ['Engineer', 'Intern']
-               const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "What is your office number",
+                    name: 'officeNum',
+                }
+            ]).then(managerRes => {
+                hasManager = 'true'
+                choiceArr = ['Engineer', 'Intern']
+                const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
                 addOtherEmplyee()
-           })
+            })
         }
-        else if(initialResponse.role === "Engineer") {
+        else if (initialResponse.role === "Engineer") {
             inquirer.prompt([
                 {
                     type: 'input',
                     message: "What is their Github account",
                     name: 'gitAccount',
-                }   
-               ]).then(enginerrRes => {
+                }
+            ]).then(enginerrRes => {
                 const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, enginerrRes.gitAccount)
-                   addOtherEmplyee()
-               })
+                addOtherEmplyee()
+            })
         }
         else {
             inquirer.prompt([
@@ -60,13 +60,13 @@ const employeeQuestions = () => {
                     type: 'input',
                     message: "What is school do they go to",
                     name: 'school',
-                }   
-               ]).then(internRes => {
+                }
+            ]).then(internRes => {
                 const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, internRes.school)
                 addOtherEmplyee()
-               })
+            })
         }
-    })    
+    })
 };
 
 const addOtherEmplyee = () => {
@@ -77,8 +77,8 @@ const addOtherEmplyee = () => {
             choices: ['yes', 'no'],
             name: 'extraEmployee',
         }
-    ]).then(({extraEmployee}) => {
-        if(extraEmployee === "yes"){
+    ]).then(({ extraEmployee }) => {
+        if (extraEmployee === "yes") {
             employeeQuestions()
         }
         else {
