@@ -38,7 +38,7 @@ const employeeQuestions = () => {
             ]).then(managerRes => {
                 hasManager = 'true'
                 choiceArr = ['Engineer', 'Intern']
-                const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
+                const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, managerRes.officeNum)
                 addOtherEmplyee()
             })
         }
@@ -50,7 +50,7 @@ const employeeQuestions = () => {
                     name: 'gitAccount',
                 }
             ]).then(enginerrRes => {
-                const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, enginerrRes.gitAccount)
+                const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, enginerrRes.gitAccount)
                 addOtherEmplyee()
             })
         }
@@ -62,7 +62,7 @@ const employeeQuestions = () => {
                     name: 'school',
                 }
             ]).then(internRes => {
-                const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, internRes.school)
+                const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, internRes.school)
                 addOtherEmplyee()
             })
         }
