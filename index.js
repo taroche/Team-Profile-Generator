@@ -1,156 +1,87 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+let choiceArr = ['Manager', 'Engineer', 'Intern']
+let hasManager = false;
 
-
-const managerQuestions = () => {
+const employeeQuestions = () => {
     return inquirer.prompt([
         {
             type: 'input',
             message: "What is your full name",
             name: 'fullName',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
         },
         {
             type: 'input',
             message: "What is your employee ID",
             name: 'employeeID',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
         },
         {
             type: 'input',
             message: "What is your email address",
             name: 'email',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is office number",
-            name: 'officeNum',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
         },
         {
             type: 'list',
-            message: "Choose the position of your team",
-            choices: ['Engineer', 'Intern', 'Done'],
-            name: 'license'
+            message: "What is your role",
+            choices: choiceArr,
+            name: 'role',
+        },
+    ]).then(initialResponse => {
+        if (initialResponse.role === "Manager") {
+           inquirer.prompt([
+            {
+                type: 'input',
+                message: "What is your office number",
+                name: 'officeNum',
+            }   
+           ]).then(managerRes => {
+               hasManager = 'true'
+               choiceArr = ['Engineer', 'Intern']
+            //    const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, managerRes.officeNum)
+                addOtherEmplyee()
+           })
         }
-    ])
+        else if(initialResponse.role === "Engineer") {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "What is their Github account",
+                    name: 'gitAccount',
+                }   
+               ]).then(enginerrRes => {
+                   addOtherEmplyee()
+               })
+        }
+        else {
+            inquirer.prompt([
+                {
+                    type: 'input',
+                    message: "What is school do they go to",
+                    name: 'school',
+                }   
+               ]).then(internRes => {
+                addOtherEmplyee()
+               })
+        }
+    })    
 };
 
-const engineerQuestions = () => {
-    return inquirer.prompt([
+const addOtherEmplyee = () => {
+    inquirer.prompt([
         {
-            type: 'input',
-            message: "What is the engineer full name",
-            name: 'fullName',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the engineer employee ID",
-            name: 'employeeID',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the engineer email address",
-            name: 'email',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the engineer Github name",
-            name: 'github',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
+            type: 'list',
+            message: "Would you like to add an other emplyee",
+            choices: ['yes', 'no'],
+            name: 'extraEmployee',
         }
-    ])
-};
+    ]).then(({extraEmployee}) => {
+        if(extraEmployee === "yes"){
+            employeeQuestions()
+        }
+        else {
+            fs.writeFile("index.html")
+        }
+    })
+}
 
-const internQuestions = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            message: "What is the intern full name",
-            name: 'fullName',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the intern employee ID",
-            name: 'employeeID',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the intern email address",
-            name: 'email',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        },
-        {
-            type: 'input',
-            message: "What is the intern school name",
-            name: 'school',
-            validate: (answer) => {
-                if (answer.length < 1) {
-                    return console.log("A valid GitHub username is required.");
-                }
-                return true;
-            }
-        }
-    ])
-};
+employeeQuestions()
