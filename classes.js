@@ -26,3 +26,7 @@ class Intern extends Employee {
         this.school = school;
     }
 }
+
+module.exports = Manager;
+module.exports = Engineer;
+module.exports = Intern;
