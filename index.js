@@ -1,8 +1,16 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+const manager = require('./html-templates/manager');
+const engineer = require('./html-templates/engineer');
+const intern = require('./html-templates/intern');
+const body = require('./html-templates/body');
 let choiceArr = ['Manager', 'Engineer', 'Intern']
 import { Manager, Engineer, Intern } from './classes.js';
 let hasManager = false;
+const managerArr = []
+const engineerArr = []
+const internArr = []
+
 
 const employeeQuestions = () => {
     return inquirer.prompt([
@@ -39,6 +47,7 @@ const employeeQuestions = () => {
                 hasManager = 'true'
                 choiceArr = ['Engineer', 'Intern']
                 const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, managerRes.officeNum)
+                managerArr.push(newManager)
                 addOtherEmplyee()
             })
         }
@@ -51,6 +60,7 @@ const employeeQuestions = () => {
                 }
             ]).then(enginerrRes => {
                 const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, enginerrRes.gitAccount)
+                engineerArr.push(newEngineer)
                 addOtherEmplyee()
             })
         }
@@ -63,6 +73,7 @@ const employeeQuestions = () => {
                 }
             ]).then(internRes => {
                 const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, internRes.school)
+                internArr.push(newIntern)
                 addOtherEmplyee()
             })
         }
@@ -82,7 +93,7 @@ const addOtherEmplyee = () => {
             employeeQuestions()
         }
         else {
-            fs.writeFile("index.html")
+            fs.writeFileSync('index.html', generateHtml (answers))
         }
     })
 }
