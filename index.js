@@ -82,7 +82,39 @@ const employeeQuestions = () => {
     })
 };
 
+function makePage() {
+    let htmlrender = htmlBody()
+    return htmlrender
+}
+async function writeAndUpdate() {
+    var structure = makePage()
+    structure += `<div class="manager row justify-content-center">`
+    managerArr.forEach((ele) => {
+        structure += managerCard(ele)
+    })
+    structure += `</div>
+    <div class="row engineer justify-content-center">`
 
+    engineerArr.forEach(ele => {
+        structure += engineerCard(ele)
+    })
+    structure += `</div>
+    <div class="row intern justify-content-center">`
+    internArr.forEach(ele => {
+        structure += internCard(ele)
+    })
+
+    structure += `           
+    </div>
+    </main>
+    </body>
+    <html>`
+    await fs.writeFileSync('index.html', structure, err => {
+        if (err) throw err
+    })
+
+
+}
 const addOtherEmplyee = () => {
     inquirer.prompt([
         {
