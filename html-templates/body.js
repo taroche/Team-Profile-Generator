@@ -1,5 +1,5 @@
-let htmlBody = $(`
-<!DOCTYPE html>
+const htmlBody = () => {
+ return `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,15 +17,8 @@ let htmlBody = $(`
         </div>
     </header>
     <main>
-        <div class="manager row justify-content-center">
-        </div>
-        <div class="row engineer justify-content-center">
-        </div>
-        <div class="row intern justify-content-center">           
-        </div>
-    </main>
-</body>
-<html>
-`)
-
+        
+        
+`
+}
 module.exports = htmlBody;
