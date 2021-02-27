@@ -8,7 +8,7 @@ const engineerCard = initialResponse => {
     </div>
     <p class="card-text">ID: ${initialResponse.id}</p>
     <p class="card-text">Email: <a href="mailto:${initialResponse.email}" class="card-link">${initialResponse.email}</a></p>
-    <p class="card-text">Github: <a href="https://github.com/${initialResponse.gitAccount}" class="card-link">${initialResponse.gitAccount}</a></p>
+    <p class="card-text">Github: <a href="https://github.com/${initialResponse.githubAcc}" class="card-link" target="_blank">${initialResponse.githubAcc}</a></p>
 </div>
 </div>
 `
