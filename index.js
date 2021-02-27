@@ -1,11 +1,13 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
-const manager = require('./html-templates/manager');
-const engineer = require('./html-templates/engineer');
-const intern = require('./html-templates/intern');
-const body = require('./html-templates/body');
+const managerCard = require('./html-templates/manager');
+const engineerCard = require('./html-templates/engineer');
+const internCard = require('./html-templates/intern');
+const htmlBody = require('./html-templates/body');
 let choiceArr = ['Manager', 'Engineer', 'Intern']
-import { Manager, Engineer, Intern } from './classes.js';
+const Manager = require("./classes/managerClass")
+const Engineer = require("./classes/engineerClass")
+const Intern = require("./classes/internClass")
 let hasManager = false;
 const managerArr = []
 const engineerArr = []
@@ -46,7 +48,7 @@ const employeeQuestions = () => {
             ]).then(managerRes => {
                 hasManager = 'true'
                 choiceArr = ['Engineer', 'Intern']
-                const newManager = new Manager(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, managerRes.officeNum)
+                const newManager = new Manager(initialResponse.fullName, initialResponse.employeeID, initialResponse.email, initialResponse.role, managerRes.officeNum)
                 managerArr.push(newManager)
                 addOtherEmplyee()
             })
@@ -59,7 +61,7 @@ const employeeQuestions = () => {
                     name: 'gitAccount',
                 }
             ]).then(enginerrRes => {
-                const newEngineer = new Engineer(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, enginerrRes.gitAccount)
+                const newEngineer = new Engineer(initialResponse.fullName, initialResponse.employeeID, initialResponse.email, initialResponse.role, enginerrRes.gitAccount)
                 engineerArr.push(newEngineer)
                 addOtherEmplyee()
             })
@@ -72,13 +74,14 @@ const employeeQuestions = () => {
                     name: 'school',
                 }
             ]).then(internRes => {
-                const newIntern = new Intern(initialResponse.name, initialResponse.employeeID, initialResponse.email, initialResponse.role, internRes.school)
+                const newIntern = new Intern(initialResponse.fullName, initialResponse.employeeID, initialResponse.email, initialResponse.role, internRes.school)
                 internArr.push(newIntern)
                 addOtherEmplyee()
             })
         }
     })
 };
+
 
 const addOtherEmplyee = () => {
     inquirer.prompt([
@@ -93,7 +96,8 @@ const addOtherEmplyee = () => {
             employeeQuestions()
         }
         else {
-            fs.writeFileSync('index.html', generateHtml (answers))
+            writeAndUpdate()
+
         }
     })
 }
