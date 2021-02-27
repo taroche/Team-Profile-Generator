@@ -1,4 +1,5 @@
-let htmlIntern = $(`
+const internCard = initialResponse => {
+    return `
             <div class="card col-md-3 col-5 mb-3 shadow p-3 bg-white rounded">
                 <div class="card-body">
                     <div class="p-3 mb-2 bg-warning text-dark">
@@ -7,9 +8,9 @@ let htmlIntern = $(`
                     </div>
                     <p class="card-text">ID: ${initialResponse.id}</p>
                     <p class="card-text">Email: <a href="mailto:${initialResponse.email}" class="card-link">${initialResponse.email}</a></p>
-                    <p class="card-text">School:${internRes.school}</p>
+                    <p class="card-text">School:${initialResponse.school}</p>
                 </div>
             </div>
-`)
-
-module.exports = htmlIntern;
+`
+}
+module.exports = internCard;
