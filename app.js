@@ -57,7 +57,7 @@ const employeeQuestions = () => {
             inquirer.prompt([
                 {
                     type: 'input',
-                    message: "What is their Github account",
+                    message: "What is their Github account (No @ needed)",
                     name: 'gitAccount',
                 }
             ]).then(enginerrRes => {
